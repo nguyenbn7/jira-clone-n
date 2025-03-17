@@ -54,10 +54,8 @@ export default function UserButton() {
           </Avatar>
 
           <div className="flex flex-col items-center justify-center">
-            <p className="text-sm font-medium text-neutral-900">
-              {"Demo User"}
-            </p>
-            <p className="text-xs text-neutral-500">{"demo@example.com"}</p>
+            <p className="text-sm font-medium text-neutral-900">{user.name}</p>
+            <p className="text-xs text-neutral-500">{user.email}</p>
           </div>
         </div>
 
