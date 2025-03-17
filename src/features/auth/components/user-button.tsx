@@ -45,7 +45,10 @@ export default function UserButton() {
 
         <Separator className="mb-1" />
 
-        <DropdownMenuItem className="h-10 flex items-center justify-center font-medium cursor-pointer">
+        <DropdownMenuItem
+          className="h-10 flex items-center justify-center font-medium cursor-pointer"
+          variant="destructive"
+        >
           <LogOut className="size-4 mr-2" />
           Log out
         </DropdownMenuItem>

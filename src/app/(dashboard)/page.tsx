@@ -1,4 +1,3 @@
-import UserButton from "@/features/auth/components/user-button";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <UserButton />;
+  return <div>This is a home page</div>;
 }
