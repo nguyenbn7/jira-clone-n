@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +26,7 @@ export default function RootLayout({
           "antialiased md:subpixel-antialiased min-h-screen"
         )}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
