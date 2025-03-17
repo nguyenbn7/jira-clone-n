@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: {
     template: "%s - Jira Clone",
-    default: "Home",
+    default: "Jira Clone",
   },
 };
 

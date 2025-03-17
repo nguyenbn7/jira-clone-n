@@ -25,9 +25,10 @@ import {
 } from "@/components/ui/form";
 import { registerSchema } from "../schemas";
 import { useRegister } from "../api/use-register";
+import { Loader } from "lucide-react";
 
 export default function SignUpCard() {
-  const { mutate } = useRegister();
+  const { mutate, isPending } = useRegister();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -74,6 +75,7 @@ export default function SignUpCard() {
                     <Input
                       {...field}
                       type="name"
+                      disabled={isPending}
                       placeholder="Enter your name"
                     />
                   </FormControl>
@@ -91,6 +93,7 @@ export default function SignUpCard() {
                     <Input
                       {...field}
                       type="email"
+                      disabled={isPending}
                       placeholder="Enter email address"
                     />
                   </FormControl>
@@ -108,6 +111,7 @@ export default function SignUpCard() {
                     <Input
                       {...field}
                       type="password"
+                      disabled={isPending}
                       placeholder="Enter password"
                     />
                   </FormControl>
@@ -116,8 +120,11 @@ export default function SignUpCard() {
               )}
             />
 
-            <Button disabled={false} size="lg" className="w-full">
-              Login
+            <Button disabled={isPending} size="lg" className="w-full">
+              Register{" "}
+              {isPending && (
+                <Loader size={16} className="ml-2 animate-spin text-blue-600" />
+              )}
             </Button>
           </form>
         </Form>

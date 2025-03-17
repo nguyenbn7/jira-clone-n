@@ -19,9 +19,10 @@ import {
 import Link from "next/link";
 import { loginSchema } from "../schemas";
 import { useLogin } from "../api/use-login";
+import { Loader } from "lucide-react";
 
 export default function SignInCard() {
-  const { mutate } = useLogin();
+  const { mutate, isPending } = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -57,6 +58,7 @@ export default function SignInCard() {
                     <Input
                       {...field}
                       type="email"
+                      disabled={isPending}
                       placeholder="Enter email address"
                     />
                   </FormControl>
@@ -74,6 +76,7 @@ export default function SignInCard() {
                     <Input
                       {...field}
                       type="password"
+                      disabled={isPending}
                       placeholder="Enter password"
                     />
                   </FormControl>
@@ -82,8 +85,11 @@ export default function SignInCard() {
               )}
             />
 
-            <Button disabled={false} size="lg" className="w-full">
-              Login
+            <Button disabled={isPending} size="lg" className="w-full">
+              Login{" "}
+              {isPending && (
+                <Loader size={16} className="ml-2 animate-spin text-blue-600" />
+              )}
             </Button>
           </form>
         </Form>

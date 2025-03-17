@@ -8,10 +8,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-import { LogOut } from "lucide-react";
+import { Loader, LogOut } from "lucide-react";
+import { useCurrent } from "../api/use-current";
+import { useLogout } from "../api/use-logout";
 
 export default function UserButton() {
-  const avatarFallback = "U";
+  const { data: user, isLoading } = useCurrent();
+  const { mutate } = useLogout();
+
+  if (isLoading)
+    return (
+      <div className="size-10 rounded-full flex items-center justify-center bg-neutral-200 border border-neutral-300">
+        <Loader size={16} className="animate-spin text-muted-foreground" />
+      </div>
+    );
+
+  if (!user) return null;
+
+  const { email, name } = user;
+
+  const avatarFallback = name
+    ? name.charAt(0).toUpperCase()
+    : email.charAt(0).toUpperCase() ?? "U";
 
   return (
     <DropdownMenu modal={false}>
@@ -48,6 +66,7 @@ export default function UserButton() {
         <DropdownMenuItem
           className="h-10 flex items-center justify-center font-medium cursor-pointer"
           variant="destructive"
+          onClick={() => mutate()}
         >
           <LogOut className="size-4 mr-2" />
           Log out
